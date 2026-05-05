@@ -1,68 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advelo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advelo</title>
 
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="logo.png">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #ff0000;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a, #111);
+    color: white;
+}
 
-        .container {
-            max-width: 600px;
-        }
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
 
-        h1 {
-            font-weight: 700; /* Bold */
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        p {
-            font-weight: 500; /* Medium */
-            font-size: 18px;
-            line-height: 1.6;
-        }
+.nav-left img {
+    width: 40px;
+}
 
-        a {
-            color: #4da6ff;
-            text-decoration: underline;
-            font-weight: 500;
-        }
+.brand {
+    font-weight: 700;
+    color: #fff;
+}
 
-        a:hover {
-            opacity: 0.8;
-        }
-    </style>
+.nav-links {
+    display: flex;
+    gap: 25px;
+    margin-left: 20px;
+}
+
+.nav-links span {
+    color: #d9d9d9;
+    opacity: 0.5;
+    font-weight: 500;
+}
+
+.resources {
+    font-weight: 600;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.username {
+    color: #d9d9d9;
+    opacity: 0.7;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+}
+
+/* LEFT TEXT */
+.hero-left {
+    max-width: 50%;
+}
+
+.hero-left h1 {
+    font-size: 80px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.blue {
+    color: #5271ff;
+}
+
+.underline {
+    border-bottom: 6px solid #5271ff;
+    display: inline-block;
+}
+
+/* RIGHT SIDE */
+.hero-right {
+    max-width: 40%;
+}
+
+.description {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.description span {
+    color: #5271ff;
+}
+
+.cta {
+    display: inline-block;
+    background: #5271ff;
+    padding: 15px 30px;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.cta:hover {
+    opacity: 0.85;
+}
+</style>
 </head>
-<link rel="icon" type="image/png" href="logo.png">
 
 <body>
 
-    <div class="container">
-        <h1>Oops!</h1>
-        <p>
-            Advelo is still working on this webpage and we should be finished shortly!
-            <a href="https://discord.gg/GXZHUsdMpQ" target="_blank">
-                Join our discord⤴︎
-            </a>
-            for updates and more about our website
-        </p>
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="nav-left">
+        <img src="logo.png">
+        <div class="brand">@Advelo</div>
+
+        <div class="nav-links">
+            <span class="resources">Resources ↓</span>
+            <span>Marketplace</span>
+            <span>About us</span>
+            <span>Servers</span>
+        </div>
     </div>
+
+    <div class="nav-right">
+        <div class="username">@username</div>
+        <img src="https://via.placeholder.com/40" class="avatar">
+    </div>
+
+</div>
+
+<!-- HERO -->
+<div class="hero">
+
+    <!-- LEFT -->
+    <div class="hero-left">
+        <h1>
+            Advertising<br>
+            Done<br>
+            <span class="blue underline">Effortlessly.</span>
+        </h1>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-right">
+        <div class="description">
+            <span>We believe in making servers grow with less hassle.</span>
+            We provide utilities and tools to kickstart your server without you worrying
+        </div>
+
+        <a href="#" class="cta">Start your server ⇥</a>
+    </div>
+
+</div>
 
 </body>
 </html>
