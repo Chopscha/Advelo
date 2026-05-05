@@ -22,7 +22,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 20px;
-    padding: 15px 25px;
+    padding: 15px 30px;
     border-radius: 20px;
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(10px);
@@ -31,50 +31,43 @@ body {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .nav-left img {
-    width: 40px;
+    width: 45px;
 }
 
 .brand {
     font-weight: 700;
-    color: #fff;
 }
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     margin-left: 20px;
 }
 
 .nav-links span {
+    cursor: pointer;
     color: #d9d9d9;
     opacity: 0.5;
     font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-links span:hover {
+    opacity: 1;
 }
 
 .resources {
     font-weight: 600;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.username {
-    color: #d9d9d9;
-    opacity: 0.7;
-    font-weight: 600;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.active {
+    color: #5271ff !important;
+    opacity: 1 !important;
+    font-weight: 700 !important;
 }
 
 /* HERO */
@@ -82,50 +75,46 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 80px;
+    padding: 100px 120px;
 }
 
-/* LEFT TEXT */
-.hero-left {
-    max-width: 50%;
-}
-
+/* LEFT */
 .hero-left h1 {
-    font-size: 80px;
-    font-weight: 700;
+    font-size: 100px;
+    line-height: 1.05;
     margin: 0;
-    line-height: 1.1;
+    font-weight: 700;
 }
 
 .blue {
     color: #5271ff;
-}
-
-.underline {
     border-bottom: 6px solid #5271ff;
-    display: inline-block;
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 .hero-right {
-    max-width: 40%;
+    max-width: 420px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    transition: 0.3s;
 }
 
 .description {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #ccc;
     margin-bottom: 30px;
 }
 
-.description span {
-    color: #5271ff;
-}
-
+/* BUTTON */
 .cta {
     display: inline-block;
     background: #5271ff;
-    padding: 15px 30px;
+    padding: 16px 35px;
     border-radius: 15px;
     color: white;
     text-decoration: none;
@@ -133,8 +122,20 @@ body {
     font-size: 18px;
 }
 
-.cta:hover {
-    opacity: 0.85;
+/* ANIMATION */
+.fade {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 </style>
 </head>
@@ -143,24 +144,22 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-
     <div class="nav-left">
         <img src="logo.png">
         <div class="brand">@Advelo</div>
 
         <div class="nav-links">
             <span class="resources">Resources ↓</span>
-            <span>Marketplace</span>
-            <span>About us</span>
-            <span>Servers</span>
+            <span onclick="changeContent('marketplace', this)">Marketplace</span>
+            <span onclick="changeContent('about', this)">About us</span>
+            <span onclick="changeContent('servers', this)" class="active">Servers</span>
         </div>
     </div>
 
     <div class="nav-right">
-        <div class="username">@username</div>
-        <img src="https://via.placeholder.com/40" class="avatar">
+        <div style="opacity:0.7; font-weight:600;">@username</div>
+        <img src="https://via.placeholder.com/40" style="border-radius:50%;">
     </div>
-
 </div>
 
 <!-- HERO -->
@@ -171,21 +170,58 @@ body {
         <h1>
             Advertising<br>
             Done<br>
-            <span class="blue underline">Effortlessly.</span>
+            <span class="blue">Effortlessly.</span>
         </h1>
     </div>
 
     <!-- RIGHT -->
-    <div class="hero-right">
-        <div class="description">
-            <span>We believe in making servers grow with less hassle.</span>
-            We provide utilities and tools to kickstart your server without you worrying
+    <div class="hero-right fade" id="contentBox">
+        <div class="title blue" id="title">Servers</div>
+
+        <div class="description" id="desc">
+            We believe in making servers grow with less hassle. We provide utilities and tools to kickstart your server without you worrying.
         </div>
 
         <a href="#" class="cta">Start your server ⇥</a>
     </div>
 
 </div>
+
+<script>
+function changeContent(type, el) {
+
+    // remove active class
+    document.querySelectorAll('.nav-links span').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    el.classList.add('active');
+
+    const title = document.getElementById('title');
+    const desc = document.getElementById('desc');
+    const box = document.getElementById('contentBox');
+
+    // trigger animation reset
+    box.classList.remove('fade');
+    void box.offsetWidth;
+    box.classList.add('fade');
+
+    if (type === 'marketplace') {
+        title.innerText = "Marketplace";
+        desc.innerText = "Browse and discover powerful tools and services to boost your server's growth effortlessly.";
+    }
+
+    if (type === 'about') {
+        title.innerText = "About us";
+        desc.innerText = "Learn more about Advelo and how we aim to simplify advertising for communities everywhere.";
+    }
+
+    if (type === 'servers') {
+        title.innerText = "Servers";
+        desc.innerText = "We believe in making servers grow with less hassle. We provide utilities and tools to kickstart your server without you worrying.";
+    }
+}
+</script>
 
 </body>
 </html>
