@@ -31,20 +31,22 @@ body {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
 .nav-left img {
-    width: 45px;
+    width: 40px;
+    cursor: pointer;
 }
 
 .brand {
     font-weight: 700;
+    cursor: pointer;
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     margin-left: 20px;
 }
 
@@ -53,37 +55,30 @@ body {
     color: #d9d9d9;
     opacity: 0.5;
     font-weight: 500;
-    transition: 0.2s;
-}
-
-.nav-links span:hover {
-    opacity: 1;
 }
 
 .resources {
     font-weight: 600;
 }
 
-.active {
-    color: #5271ff !important;
-    opacity: 1 !important;
-    font-weight: 700 !important;
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-/* HERO */
-.hero {
+/* HOME HERO */
+.home {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 100px 120px;
 }
 
-/* LEFT */
 .hero-left h1 {
     font-size: 100px;
-    line-height: 1.05;
     margin: 0;
-    font-weight: 700;
+    line-height: 1.05;
 }
 
 .blue {
@@ -91,16 +86,8 @@ body {
     border-bottom: 6px solid #5271ff;
 }
 
-/* RIGHT */
 .hero-right {
     max-width: 420px;
-}
-
-.title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    transition: 0.3s;
 }
 
 .description {
@@ -110,32 +97,45 @@ body {
     margin-bottom: 30px;
 }
 
-/* BUTTON */
 .cta {
-    display: inline-block;
     background: #5271ff;
-    padding: 16px 35px;
+    padding: 15px 30px;
     border-radius: 15px;
-    color: white;
     text-decoration: none;
+    color: white;
     font-weight: 600;
-    font-size: 18px;
 }
 
-/* ANIMATION */
-.fade {
-    animation: fadeIn 0.4s ease;
+/* TAB PAGE (like your reference image) */
+.tab-page {
+    display: none;
+    text-align: center;
+    margin-top: 100px;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.tab-page img {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.badge {
+    border: 2px solid #5271ff;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #5271ff;
+    margin-bottom: 20px;
+}
+
+.tab-title {
+    font-size: 70px;
+    font-weight: 700;
+}
+
+.tab-desc {
+    color: #ccc;
+    font-size: 20px;
+    margin-top: 10px;
 }
 </style>
 </head>
@@ -145,14 +145,14 @@ body {
 <!-- NAVBAR -->
 <div class="navbar">
     <div class="nav-left">
-        <img src="logo.png">
-        <div class="brand">@Advelo</div>
+        <img src="logo.png" onclick="goHome()">
+        <div class="brand" onclick="goHome()">@Advelo</div>
 
         <div class="nav-links">
             <span class="resources">Resources ↓</span>
-            <span onclick="changeContent('marketplace', this)">Marketplace</span>
-            <span onclick="changeContent('about', this)">About us</span>
-            <span onclick="changeContent('servers', this)" class="active">Servers</span>
+            <span onclick="openTab('Marketplace')">Marketplace</span>
+            <span onclick="openTab('About us')">About us</span>
+            <span onclick="openTab('Servers')">Servers</span>
         </div>
     </div>
 
@@ -162,10 +162,9 @@ body {
     </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
+<!-- HOME -->
+<div class="home" id="home">
 
-    <!-- LEFT -->
     <div class="hero-left">
         <h1>
             Advertising<br>
@@ -174,11 +173,8 @@ body {
         </h1>
     </div>
 
-    <!-- RIGHT -->
-    <div class="hero-right fade" id="contentBox">
-        <div class="title blue" id="title">Servers</div>
-
-        <div class="description" id="desc">
+    <div class="hero-right">
+        <div class="description">
             We believe in making servers grow with less hassle. We provide utilities and tools to kickstart your server without you worrying.
         </div>
 
@@ -187,39 +183,45 @@ body {
 
 </div>
 
+<!-- TAB PAGE -->
+<div class="tab-page" id="tabPage">
+    <img src="logo.png">
+
+    <div class="badge">Launching soon</div>
+
+    <div class="tab-title" id="tabTitle">Servers</div>
+
+    <div class="tab-desc" id="tabDesc">
+        Find all of the best servers under specific categories!
+    </div>
+</div>
+
 <script>
-function changeContent(type, el) {
+function openTab(name) {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("tabPage").style.display = "block";
 
-    // remove active class
-    document.querySelectorAll('.nav-links span').forEach(item => {
-        item.classList.remove('active');
-    });
+    document.getElementById("tabTitle").innerText = name;
 
-    el.classList.add('active');
-
-    const title = document.getElementById('title');
-    const desc = document.getElementById('desc');
-    const box = document.getElementById('contentBox');
-
-    // trigger animation reset
-    box.classList.remove('fade');
-    void box.offsetWidth;
-    box.classList.add('fade');
-
-    if (type === 'marketplace') {
-        title.innerText = "Marketplace";
-        desc.innerText = "Browse and discover powerful tools and services to boost your server's growth effortlessly.";
+    if (name === "Servers") {
+        document.getElementById("tabDesc").innerText =
+        "Find all of the best servers under specific categories!";
     }
 
-    if (type === 'about') {
-        title.innerText = "About us";
-        desc.innerText = "Learn more about Advelo and how we aim to simplify advertising for communities everywhere.";
+    if (name === "Marketplace") {
+        document.getElementById("tabDesc").innerText =
+        "Explore tools and services to boost your server.";
     }
 
-    if (type === 'servers') {
-        title.innerText = "Servers";
-        desc.innerText = "We believe in making servers grow with less hassle. We provide utilities and tools to kickstart your server without you worrying.";
+    if (name === "About us") {
+        document.getElementById("tabDesc").innerText =
+        "Learn more about what Advelo is building.";
     }
+}
+
+function goHome() {
+    document.getElementById("home").style.display = "flex";
+    document.getElementById("tabPage").style.display = "none";
 }
 </script>
 
